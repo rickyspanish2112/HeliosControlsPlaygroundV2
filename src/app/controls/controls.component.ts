@@ -27,7 +27,7 @@ export class ControlsComponent implements OnInit {
     this.declarationTypes$ = this.typeCtrl.valueChanges.pipe(
       startWith(''),
       map(type =>
-        type ? this.filteredStates(type) : this.declarationTypes.slice()
+        type ? this.filteredTypes(type) : this.declarationTypes.slice()
       )
     );
   }
@@ -38,7 +38,7 @@ export class ControlsComponent implements OnInit {
     });
   }
 
-  filteredStates(value: string): Declarationtype[] {
+  filteredTypes(value: string): Declarationtype[] {
     const filterValue = value.toLowerCase();
 
     return this.declarationTypes.filter(
