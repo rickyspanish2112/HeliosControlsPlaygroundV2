@@ -17,21 +17,32 @@ export class ControlsComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor(private getDataService: GetdataService, private fb: FormBuilder) {}
+  constructor(private getDataService: GetdataService, private fb: FormBuilder) {
+    getDataService.getAllDeclarationTypes();
+  }
 
   ngOnInit() {
-this.declarationTypes$ = this.typeCtrl.valueChanges
-.pipe(startWith(''),
-map(type => type ? this.filteredStates(type) : this.getDeclarationTypes()));
+    this.getDeclarationTypes();
 
+    this.declarationTypes$ = this.typeCtrl.valueChanges.pipe(
+      startWith(''),
+      map(type =>
+        type ? this.filteredStates(type) : this.declarationTypes.slice()
+      )
+    );
+  }
+
+  getDeclarationTypes() {
+    this.getDataService.getAllDeclarationTypes().subscribe(data => {
+      return (this.declarationTypes = data);
+    });
   }
 
   filteredStates(value: string): Declarationtype[] {
-    throw new Error('Method not implemented.');
-  }
+    const filterValue = value.toLowerCase();
 
-  getDeclarationTypes(): any {
-    throw new Error('Method not implemented.');
+    return this.declarationTypes.filter(
+      state => state.value.toLowerCase().indexOf(filterValue) === 0
+    );
   }
-
 }
