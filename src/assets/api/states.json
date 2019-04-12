@@ -6,16 +6,16 @@
   "names": ["California", "Colorado", "Connecticut"]
 }, {
   "letter": "D",
-  "names": "Delaware"
+  "names": ["Delaware"]
 }, {
   "letter": "F",
-  "names": "Florida"
+  "names": ["Florida"]
 }, {
   "letter": "G",
-  "names": "Georgia"
+  "names": ["Georgia"]
 }, {
   "letter": "H",
-  "names": "Hawaii"
+  "names": ["Hawaii"]
 }, {
   "letter": "I",
   "names": ["Idaho", "Illinois", "Indiana", "Iowa"]
@@ -38,10 +38,10 @@
   "names": ["Ohio", "Oklahoma", "Oregon"]
 }, {
   "letter": "P",
-  "names": "Pennsylvania"
+  "names": ["Pennsylvania"]
 }, {
   "letter": "R",
-  "names": "Rhode Island"
+  "names": ["Rhode Island"]
 }, {
   "letter": "S",
   "names": ["South Carolina", "South Dakota"]
@@ -50,7 +50,7 @@
   "names": ["Tennessee", "Texas"]
 }, {
   "letter": "U",
-  "names": "Utah"
+  "names": ["Utah"]
 }, {
   "letter": "V",
   "names": ["Vermont", "Virginia"]

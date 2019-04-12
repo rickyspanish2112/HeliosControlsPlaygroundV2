@@ -26,7 +26,7 @@ export class ControlsComponent implements OnInit {
   stateForm: FormGroup = this.fb.group({
     stateGroup: ''
   });
-  stateGroups$: Observable<State[]>;
+  stateGroupsOptions$: Observable<State[]>;
   stateGroups: State[] = [];
 
   constructor(private getDataService: GetdataService, private fb: FormBuilder) {
@@ -44,10 +44,12 @@ export class ControlsComponent implements OnInit {
       )
     );
 
-    this.stateGroups$ = this.stateForm.get('stateGroup').valueChanges.pipe(
-      startWith(''),
-      map(value => this.filterGroup(value))
-    );
+    this.stateGroupsOptions$ = this.stateForm
+      .get('stateGroup')
+      .valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterGroup(value))
+      );
   }
   getStates() {
     this.getDataService.getAllStates().subscribe(data => {
@@ -55,7 +57,7 @@ export class ControlsComponent implements OnInit {
     });
   }
 
-  filterGroup(value: any): any {
+  _filterGroup(value: any): any {
     if (value) {
       return this.stateGroups
         .map(group => ({

@@ -1,12 +1,24 @@
 @import '../../styles.scss';
 
-.example-form {
+.declarationType-example-form {
   min-width: 50px;
   max-width: 50px;
   width: 50%;
 }
 
-.example-full-width {
+.declarationType-full-width {
   width: 50%;
   font-size: 12px;
 }
+
+.states-example-form {
+  min-width: 90px;
+  max-width: 90px;
+  width: 90%;
+}
+
+.states-full-width {
+  width: 90%;
+  font-size: 12px;
+}
+
