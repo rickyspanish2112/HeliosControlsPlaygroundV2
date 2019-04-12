@@ -1,3 +1,12 @@
-<p>
-  controls works!
-</p>
+<label>Un-constrained Combo box</label>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput aria-label="State" [matAutocomplete]="auto" [formControl]="typeCtrl">
+    <mat-autocomplete #auto="matAutocomplete" [panelWidth]="700">
+      <mat-option  *ngFor="let type of declarationTypes$ | async" [value]="type.value" class="comboBox">
+        <span>{{type.value}}</span> |
+        <small>Description: {{type.declarationTypeCodeDescription}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <br>

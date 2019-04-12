@@ -14,7 +14,6 @@ export class ControlsComponent implements OnInit {
   declarationTypes$: Observable<Declarationtype[]>; // Filtered states
   declarationTypes: Declarationtype[] = [];
   typeCtrl = new FormControl();
-
   errorMessage: string;
 
   constructor(private getDataService: GetdataService, private fb: FormBuilder) {
