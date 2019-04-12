@@ -44,7 +44,7 @@ export class ControlsComponent implements OnInit {
       )
     );
 
-    this.stateGroups$ = this.stateForm.get('stateGroup')!.valueChanges.pipe(
+    this.stateGroups$ = this.stateForm.get('stateGroup').valueChanges.pipe(
       startWith(''),
       map(value => this.filterGroup(value))
     );
