@@ -1,4 +1,4 @@
 export class State {
   letter: string;
-  name: string;
+  names: string[];
 }
