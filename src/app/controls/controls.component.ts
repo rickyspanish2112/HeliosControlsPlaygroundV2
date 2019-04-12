@@ -4,6 +4,7 @@ import { Declarationtype } from '../model/declarationtypes';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { State } from '../model/state';
 
 @Component({
   selector: 'app-controls',
@@ -15,6 +16,9 @@ export class ControlsComponent implements OnInit {
   declarationTypes: Declarationtype[] = [];
   typeCtrl = new FormControl();
   errorMessage: string;
+
+  states$: Observable<State[]>;
+  states: State[] = [];
 
   constructor(private getDataService: GetdataService, private fb: FormBuilder) {
     getDataService.getAllDeclarationTypes();
