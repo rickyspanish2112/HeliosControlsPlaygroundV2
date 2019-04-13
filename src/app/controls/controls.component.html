@@ -1,4 +1,4 @@
-<label>Un-constrained Combo box</label>
+<label><em>Un-constrained drop down box</em></label>
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <input matInput aria-label="State" [matAutocomplete]="auto" [formControl]="typeCtrl">
@@ -9,11 +9,13 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+  </form>
+
   <br>
 
   <form [formGroup]="stateForm">
     <mat-form-field>
-      <input type="text" matInput placeholder="States Group" formControlName="stateGroup" required [matAutocomplete]="autoGroup">
+      <input type="text" matInput placeholder="Country Groups" formControlName="stateGroup" required [matAutocomplete]="autoGroup">
         <mat-autocomplete #autoGroup="matAutocomplete">
           <mat-optgroup *ngFor="let group of stateGroups$ | async" [label]="group.letter">
             <mat-option *ngFor="let name of group.names" [value]="name" class="comboBox">
@@ -23,3 +25,19 @@
       </mat-autocomplete>
     </mat-form-field>
   </form>
+
+  <mat-form-field>
+    <mat-label>Contry Code</mat-label>
+    <mat-select >
+      <mat-option *ngFor="let country of countries">{{country.code}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Autosize textarea</mat-label>
+    <textarea matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="2"
+              cdkAutosizeMaxRows="5"></textarea>
+  </mat-form-field>

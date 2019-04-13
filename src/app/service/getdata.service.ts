@@ -4,6 +4,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { Declarationtype } from '../model/declarationtypes';
 import { throwError } from 'rxjs';
 import { State } from '../model/state';
+import { Country } from '../model/country';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,25 @@ export class GetdataService {
   }
 
   getAllStates(){
-    const states = '../../../assets/api/states.json';
+    const states = '../../assets/api/countrygroups.json';
     return this.http.get<State[]>(states).pipe(
       tap(this.doGetStates()),
       catchError(this.handleError));
+  }
+
+  getAllCountries() {
+    const countries = '../../assets/api/countries.json';
+    return this.http.get<Country[]>(countries).pipe(
+      tap(this.doGetCountries()),
+      catchError(this.handleError));
+
+
+  }
+  doGetCountries(): (x: Country[]) => void {
+    return data =>
+    console.log(
+      'The following declaration types were returned: ' + JSON.stringify(data)
+    );
   }
 
  private doGetStates(): (x: State[]) => void {

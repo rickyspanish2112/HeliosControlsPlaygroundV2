@@ -1,0 +1,108 @@
+[
+  {
+    "letter": "A",
+    "names": ["Afghanistan", "Albania", "Algeria", "American Samoa"]
+  },
+  {
+    "letter": "B",
+    "names": ["Bahamas", "Bahrain", "Bangladesh", "Barbados"]
+  },
+  {
+    "letter": "C",
+    "names": ["Cambodia", "Cameroon", "Canada"]
+  },
+  {
+    "letter": "D",
+    "names": ["Denmark", "Djibouti", "Dominica"]
+  },
+  {
+    "letter": "E",
+    "names": ["East Timor", "Ecuador", "Egypt"]
+  },
+  {
+    "letter": "F",
+    "names": ["Falkland Islands", "Faroe Islands", "Fiji"]
+  },
+  {
+    "letter": "G",
+    "names": ["Gabon", "Gambia", "Georgia"]
+  },
+  {
+    "letter": "H",
+    "names": ["Haiti", "Honduras", "Hong Kong"]
+  },
+  {
+    "letter": "I",
+    "names": ["Iceland", "India", "Indonesia", "Iran"]
+  },
+  {
+    "letter": "J",
+    "names": ["Jamaica", "Japan", "Jersey"]
+  },
+  {
+    "letter": "K",
+    "names": ["Kazakhstan", "Kenya", "Kiribati"]
+  },
+  {
+    "letter": "L",
+    "names": ["Laos", "Latvia", "Lebanon"]
+  },
+  {
+    "letter": "M",
+    "names": [
+      "Macau",
+      "Macedonia",
+      "Madagascar",
+      "Malawi",
+      "Malaysia",
+      "Maldives",
+      "Mali",
+      "Malta"
+    ]
+  },
+  {
+    "letter": "N",
+    "names": [
+      "Namibia",
+      "Nauru",
+      "Nepal",
+      "Netherlands",
+      "Netherlands Antilles",
+      "New Caledonia",
+      "Nicaragua",
+      "Nigeria"
+    ]
+  },
+  {
+    "letter": "O",
+    "names": ["Oman"]
+  },
+  {
+    "letter": "P",
+    "names": ["Pakistan", "Palau"]
+  },
+  {
+    "letter": "R",
+    "names": ["Republic of the Congo", "Reunion"]
+  },
+  {
+    "letter": "S",
+    "names": ["Saint Barthelemy", "Saint Helena"]
+  },
+  {
+    "letter": "T",
+    "names": ["Taiwan", "Tajikistan"]
+  },
+  {
+    "letter": "U",
+    "names": ["Uganda", "United Kingdom"]
+  },
+  {
+    "letter": "V",
+    "names": ["Vatican", "Vietnam"]
+  },
+  {
+    "letter": "W",
+    "names": ["Wallis and Futuna", "Western Sahara"]
+  }
+]
