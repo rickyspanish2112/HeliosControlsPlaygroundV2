@@ -5,7 +5,7 @@
     <mat-autocomplete #auto="matAutocomplete" [panelWidth]="700">
       <mat-option  *ngFor="let type of declarationTypes$ | async" [value]="type.value" class="comboBox">
         <span>{{type.value}}</span> |
-        <small>Description: {{type.declarationTypeCodeDescription}}</small>
+        <small>{{type.declarationTypeCodeDescription}}</small>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
