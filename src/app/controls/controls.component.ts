@@ -31,12 +31,11 @@ export class ControlsComponent implements OnInit {
   stateGroups$: Observable<State[]>;
   stateGroups: State[] = [];
 
-  countries$: Observable<Country>;
   countries: Country[] = [];
+  selected: Country;
+  selectedCountryName: string;
 
-  constructor(private getDataService: GetdataService,
-     private fb: FormBuilder,
-     private ngZone: NgZone) {
+  constructor(private getDataService: GetdataService, private fb: FormBuilder) {
     getDataService.getAllDeclarationTypes();
   }
 
@@ -63,9 +62,8 @@ export class ControlsComponent implements OnInit {
     this.getDataService.getAllCountries().subscribe(data => {
       return (this.countries = data);
     });
-
   }
- private getStates() {
+  private getStates() {
     this.getDataService.getAllStates().subscribe(data => {
       return (this.stateGroups = data);
     });
@@ -82,13 +80,13 @@ export class ControlsComponent implements OnInit {
     }
   }
 
- private getDeclarationTypes() {
+  private getDeclarationTypes() {
     this.getDataService.getAllDeclarationTypes().subscribe(data => {
       return (this.declarationTypes = data);
     });
   }
 
- private filteredTypes(value: string): Declarationtype[] {
+  private filteredTypes(value: string): Declarationtype[] {
     const filterValue = value.toLowerCase();
 
     return this.declarationTypes.filter(
@@ -96,9 +94,13 @@ export class ControlsComponent implements OnInit {
     );
   }
 
-  onCountryCodeChanged() {
-    // Wait for changes to be applied, then trigger textarea resize.
-    this.ngZone.onStable.pipe(take(1))
-        .subscribe(() => this.autosize.resizeToFitContent(true));
+  onCountryCodeChanged(value: string) {
+    const country = this.countries.find(x => x.code === value);
+
+    if (country === null) {
+      this.selected.code = 'Unable to find country';
+    } else {
+      this.selectedCountryName = country.name;
+    }
   }
 }

@@ -1,9 +1,17 @@
 @import '../../styles.scss';
 
-.example-form {
+.declarationType {
   min-width: 50px;
   max-width: 50px;
   width: 50%;
+}
+
+.countryGroup {
+  min-width: 170px;
+  max-width: 170px;
+  width: 150px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
 }
 
 .example-full-width {
@@ -13,4 +21,21 @@
 
 mat-form-field {
   margin-right: 12px;
+}
+
+.countryCode{
+  min-width: 50px;
+  max-width: 50px;
+  width: 50%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+}
+
+.readOnlyControl {
+  border: 1px gray solid;
+  background: lightgray;
+  border-radius: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.75em;
+  padding: 5px;
 }

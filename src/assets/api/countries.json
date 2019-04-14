@@ -1,61 +1,61 @@
 [
   {
     "Id": 1,
-    "value": "GB",
-    "declarationTypeCodeDescription": "United Kingdom"
+    "code": "GB",
+    "name": "United Kingdom"
   },
   {
     "Id": 2,
-    "value": "US",
-    "declarationTypeCodeDescription": "United States"
+    "code": "US",
+    "name": "United States"
   },
   {
     "Id": 3,
-    "value": "ZA",
-    "declarationTypeCodeDescription": "South Africa"
+    "code": "ZA",
+    "name": "South Africa"
   },
   {
     "Id": 4,
-    "value": "AU",
-    "declarationTypeCodeDescription": "Australia"
+    "code": "AU",
+    "name": "Australia"
   },
   {
     "Id": 1,
-    "value": "BS",
-    "declarationTypeCodeDescription": "Bahamas"
+    "code": "BS",
+    "name": "Bahamas"
   },
   {
     "Id": 1,
-    "value": "CZ",
-    "declarationTypeCodeDescription": "Czech Republic"
-  },
-
-  {
-    "Id": 1,
-    "value": "DK",
-    "declarationTypeCodeDescription": "Denmark"
+    "code": "CZ",
+    "name": "Czech Republic"
   },
 
   {
     "Id": 1,
-    "value": "EG",
-    "declarationTypeCodeDescription": "Egypt"
+    "code": "DK",
+    "name": "Denmark"
   },
 
   {
     "Id": 1,
-    "value": "FI",
-    "declarationTypeCodeDescription": "Finland"
+    "code": "EG",
+    "name": "Egypt"
   },
 
   {
     "Id": 1,
-    "value": "DE",
-    "declarationTypeCodeDescription": "Germany"
+    "code": "FI",
+    "name": "Finland"
+  },
+
+  {
+    "Id": 1,
+    "code": "DE",
+    "name": "Germany"
   },
   {
     "Id": 1,
-    "value": "JP",
-    "declarationTypeCodeDescription": "Japan"
+    "code": "JP",
+    "name": "Japan"
   }
   ]
