@@ -1,0 +1,61 @@
+[
+  {
+    "Id": 1,
+    "code": "GB",
+    "name": "United Kingdom"
+  },
+  {
+    "Id": 2,
+    "code": "US",
+    "name": "United States"
+  },
+  {
+    "Id": 3,
+    "code": "ZA",
+    "name": "South Africa"
+  },
+  {
+    "Id": 4,
+    "code": "AU",
+    "name": "Australia"
+  },
+  {
+    "Id": 1,
+    "code": "BS",
+    "name": "Bahamas"
+  },
+  {
+    "Id": 1,
+    "code": "CZ",
+    "name": "Czech Republic"
+  },
+
+  {
+    "Id": 1,
+    "code": "DK",
+    "name": "Denmark"
+  },
+
+  {
+    "Id": 1,
+    "code": "EG",
+    "name": "Egypt"
+  },
+
+  {
+    "Id": 1,
+    "code": "FI",
+    "name": "Finland"
+  },
+
+  {
+    "Id": 1,
+    "code": "DE",
+    "name": "Germany"
+  },
+  {
+    "Id": 1,
+    "code": "JP",
+    "name": "Japan"
+  }
+  ]

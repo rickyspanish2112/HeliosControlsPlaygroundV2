@@ -1,54 +1,41 @@
-<div>
-  <label for="type">Un-constrained Combo box</label>
-  <form class="declarationType-example-form">
-    <mat-form-field class="declarationType-full-width">
-      <input
-        id="type"
-        matInput
-        aria-label="State"
-        [matAutocomplete]="auto"
-        [formControl]="typeCtrl"
-      />
-      <mat-autocomplete #auto="matAutocomplete" [panelWidth]="700">
-        <mat-option
-          *ngFor="let type of (declarationTypes$ | async)"
-          [value]="type.value"
-          class="comboBox"
-        >
-          <span>{{ type.value }}</span> |
-          <small>Description: {{ type.declarationTypeCodeDescription }}</small>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+<label><em>Un-constrained drop down box</em></label>
+<form class="declarationType">
+  <mat-form-field class="example-full-width">
+    <input matInput aria-label="State" [matAutocomplete]="auto" [formControl]="typeCtrl">
+    <mat-autocomplete #auto="matAutocomplete" [panelWidth]="700">
+      <mat-option  *ngFor="let type of declarationTypes$ | async" [value]="type.value" class="comboBox">
+        <span>{{type.value}}</span> |
+        <small>{{type.declarationTypeCodeDescription}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
   </form>
 
-<br>
-
-  <label for="type">Un-constrained Combo box with Letter Grouping</label>
-  <form [formGroup]="stateForm" class="states-example-form">
-    <mat-form-field class="states-full-width">
-      <input
-        id="state"
-        type="text"
-        matInput
-        formControlName="stateGroup"
-        required
-        [matAutocomplete]="autoGroup"
-      />
-      <mat-autocomplete #autoGroup="matAutocomplete" [panelWidth]="700">
-        <mat-optgroup
-          *ngFor="let group of (stateGroupsOptions$ | async)"
-          [label]="group.letter"
-        >
-          <mat-option
-            *ngFor="let name of group.names"
-            [value]="name"
-            class="comboBox"
-          >
-            {{ name }}
-          </mat-option>
+  <form [formGroup]="stateForm" class="countryGroup">
+    <mat-form-field class="countryGroup">
+      <input class="countryGroup" type="text" matInput formControlName="stateGroup" required [matAutocomplete]="autoGroup">
+        <mat-autocomplete #autoGroup="matAutocomplete">
+          <mat-optgroup *ngFor="let group of stateGroups$ | async" [label]="group.letter">
+            <mat-option *ngFor="let name of group.names" [value]="name" class="comboBox">
+              {{name}}
+            </mat-option>
         </mat-optgroup>
       </mat-autocomplete>
     </mat-form-field>
   </form>
-</div>
+<br>
+
+<label><em>Constrained drop down box</em></label>
+<form>
+  <mat-form-field class="countryCode">
+    <mat-select [(value)]="selected" (selectionChange)="onCountryCodeChanged(selected)">
+      <mat-option *ngFor=" let country of countries"
+      [value]="country.code" >{{country.code}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+    <mat-form-field>
+      <input matInput disabled value={{selectedCountryName}} class="readOnlyControl">
+    </mat-form-field>
+  </form>
+
