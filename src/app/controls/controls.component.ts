@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, HostListener } from '@angular/core';
 import { GetdataService } from '../service/getdata.service';
 import { Declarationtype } from '../model/declarationtypes';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { State } from '../model/state';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Country } from '../model/country';
+import { MatAutocompleteTrigger } from '@angular/material';
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -22,12 +23,16 @@ export const _filter = (opt: string[], value: string): string[] => {
 export class ControlsComponent implements OnInit {
   declarationTypes$: Observable<Declarationtype[]>;
   declarationTypes: Declarationtype[] = [];
-  typeCtrl = new FormControl();
+
   errorMessage: string;
 
+  typeCtrl = new FormControl();
   stateForm: FormGroup = this.fb.group({
     stateGroup: ''
   });
+
+ lookupInput = new FormControl();
+
   stateGroupsOptions$: Observable<State[]>;
   stateGroups: State[] = [];
 
@@ -35,21 +40,23 @@ export class ControlsComponent implements OnInit {
   selected: Country;
   selectedCountryName: string;
 
+  @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
+
   constructor(private getDataService: GetdataService, private fb: FormBuilder) {
     getDataService.getAllDeclarationTypes();
   }
-
-  @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   ngOnInit() {
     this.getDeclarationTypes();
     this.getStates();
     this.getCountries();
 
-    this.declarationTypes$ = this.typeCtrl.valueChanges.pipe(
-      startWith(''),
+    this.declarationTypes$ = this.typeCtrl
+    .valueChanges
+    .pipe(
       map(type =>
-        type ? this.filteredTypes(type) : this.declarationTypes.slice()
+        // type ? this.filteredTypes(type) : this.declarationTypes.slice()
+        this.filteredTypes(type)
       )
     );
 
@@ -105,4 +112,11 @@ export class ControlsComponent implements OnInit {
       this.selectedCountryName = country.name;
     }
   }
+
+/*   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown') {
+      this.autocomplete.openPanel();
+    }
+  }
+ */
 }

@@ -1,7 +1,7 @@
 <label><em>Un-constrained drop down box</em></label>
 <form class="declarationType">
   <mat-form-field class="example-full-width">
-    <input matInput aria-label="State" [matAutocomplete]="auto" [formControl]="typeCtrl">
+    <input matInput aria-label="State" [matAutocomplete]="auto" [formControl]="typeCtrl" class="unConstrainedDropdown">
     <mat-autocomplete #auto="matAutocomplete" [panelWidth]="700">
       <mat-option  *ngFor="let type of declarationTypes$ | async" [value]="type.value" class="comboBox">
         <span>{{type.value}}</span> |
@@ -13,9 +13,9 @@
 
   <form [formGroup]="stateForm" class="countryGroup">
     <mat-form-field class="countryGroup">
-      <input class="countryGroup" type="text" matInput formControlName="stateGroup" required [matAutocomplete]="autoGroup">
+      <input class="unConstrainedDropdown" type="text" matInput formControlName="stateGroup" required [matAutocomplete]="autoGroup">
         <mat-autocomplete #autoGroup="matAutocomplete">
-          <mat-optgroup *ngFor="let group of stateGroups$ | async" [label]="group.letter">
+          <mat-optgroup *ngFor="let group of stateGroupsOptions$ | async" [label]="group.letter">
             <mat-option *ngFor="let name of group.names" [value]="name" class="comboBox">
               {{name}}
             </mat-option>
@@ -23,6 +23,7 @@
       </mat-autocomplete>
     </mat-form-field>
   </form>
+
 <br>
 
 <label><em>Constrained drop down box</em></label>
@@ -39,3 +40,11 @@
     </mat-form-field>
   </form>
 
+  <br>
+
+  <label id="lookup"><em>Lookup Control</em></label>
+  <form>
+      <mat-form-field >
+      <input matInput aria-label="lookup"  [formControl]="lookupInput" class="lookup-input">
+      </mat-form-field>
+    </form>

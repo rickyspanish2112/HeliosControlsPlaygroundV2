@@ -7,8 +7,6 @@
 }
 
 .countryGroup {
-  min-width: 170px;
-  max-width: 170px;
   width: 150px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 12px;
@@ -28,7 +26,7 @@ mat-form-field {
   max-width: 50px;
   width: 50%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 20px;
+  font-size: 0.95em;
 }
 
 .readOnlyControl {
@@ -38,4 +36,26 @@ mat-form-field {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 0.75em;
   padding: 5px;
+}
+
+.lookup-input {
+  border: 1px gray solid;
+  background: lightgray;
+  border-radius: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.95em;
+  padding: 5px;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.unConstrainedDropdown {
+  border-bottom: 1px gray solid;
+  min-width: 100px;
+  max-width: 100px;
+  width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.95em;
 }
