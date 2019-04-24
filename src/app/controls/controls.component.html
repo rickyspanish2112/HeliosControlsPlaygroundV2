@@ -45,6 +45,6 @@
   <label id="lookup"><em>Lookup Control</em></label>
   <form>
       <mat-form-field >
-      <input matInput aria-label="lookup"  [formControl]="lookupInput" class="lookup-input">
+      <input matInput aria-label="lookup"  [formControl]="lookupInput" class="lookup-input" (keyup)="openLookupDialog($event)">
       </mat-form-field>
     </form>

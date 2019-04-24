@@ -7,7 +7,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { State } from '../model/state';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Country } from '../model/country';
-import { MatAutocompleteTrigger } from '@angular/material';
+import { MatAutocompleteTrigger, MatDialog } from '@angular/material';
+import { LookupdialogComponent } from './lookup-dialog/lookupdialog.component';
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -42,7 +43,8 @@ export class ControlsComponent implements OnInit {
 
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
 
-  constructor(private getDataService: GetdataService, private fb: FormBuilder) {
+  constructor(private getDataService: GetdataService,
+    private fb: FormBuilder, private matDialog: MatDialog) {
     getDataService.getAllDeclarationTypes();
   }
 
@@ -111,6 +113,16 @@ export class ControlsComponent implements OnInit {
     } else {
       this.selectedCountryName = country.name;
     }
+  }
+
+  openLookupDialog(event: any) {
+    if (event.target.value === '?') {
+      this.matDialog.open(LookupdialogComponent, {
+        height: '300px',
+        width: '300px',
+      });
+    }
+
   }
 
 /*   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
