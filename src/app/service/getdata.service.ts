@@ -37,7 +37,7 @@ export class GetdataService {
 
 
   }
-  doGetCountries(): (x: Country[]) => void {
+ private doGetCountries(): (x: Country[]) => void {
     return data =>
     console.log(
       'The following declaration types were returned: ' + JSON.stringify(data)
