@@ -1,4 +1,5 @@
 @import '../../styles.scss';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 .declarationType {
   min-width: 50px;
@@ -58,4 +59,36 @@ mat-form-field {
   width: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 0.95em;
+}
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.basic-container {
+  padding: 5px;
+}
+
+.mat-icon.inline-icon {
+  font-size: inherit;
+  height: inherit;
+  line-height: inherit;
+  width: inherit;
+}
+button:not([override-styles]) {
+  text-transform: uppercase;
+}
+
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+/deep/ .mat-dialog-content {
+  overflow-y: hidden !important;
 }

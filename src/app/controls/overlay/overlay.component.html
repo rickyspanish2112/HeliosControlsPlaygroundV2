@@ -1,10 +1,11 @@
+<div class="demo-spagetti">
 <mat-radio-group>
 
   <table cdk-table [dataSource]="dataSource">
 
           <!-- Selected Column -->
           <ng-container matColumnDef="selected">
-              <th cdk-header-cell *cdkHeaderCellDef > Selected </th>
+              <th cdk-header-cell *cdkHeaderCellDef ></th>
               <td mat-cell *matCellDef="let element">
                 <mat-radio-button [value]="element">
                 </mat-radio-button>
@@ -26,7 +27,9 @@
     <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
     <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
 
-
   </table>
 
+  <button style="margin-right: 5px; margin-top: 5px;">OK</button> <button>Cancel</button>
+
   </mat-radio-group>
+</div>

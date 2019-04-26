@@ -4,7 +4,9 @@ import {
   ViewChild,
   ViewChildren,
   QueryList,
-  ViewContainerRef
+  ViewContainerRef,
+  ElementRef,
+  TemplateRef
 } from '@angular/core';
 import { GetdataService } from '../service/getdata.service';
 import { Declarationtype } from '../model/declarationtypes';
@@ -13,7 +15,7 @@ import { startWith, map, take } from 'rxjs/operators';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { State } from '../model/state';
 import { Country } from '../model/country';
-import { MatAutocompleteTrigger, MatDialog } from '@angular/material';
+import { MatAutocompleteTrigger, MatDialog, MatTableDataSource } from '@angular/material';
 import {
   TemplatePortalDirective,
   Portal,
@@ -23,7 +25,9 @@ import {
   Overlay,
   CdkOverlayOrigin,
   OverlayConfig,
-  ConnectionPositionPair
+  ConnectionPositionPair,
+  OverlayRef,
+  PositionStrategy
 } from '@angular/cdk/overlay';
 import { OverlayComponent } from './overlay/overlay.component';
 
@@ -60,17 +64,39 @@ export class ControlsComponent implements OnInit {
 
   isMenuOpen = false;
 
+  displayedColumns: string[] = ['selected', 'code', 'name'];
+  countryData:  Country[];
+  dataSource: MatTableDataSource<Country>;
+
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
   @ViewChildren(TemplatePortalDirective) templatePortals: QueryList<Portal<any>>;
+
+  @ViewChild('secondDialog') secondDialog: TemplateRef<any>;
+  @ViewChild('input') buttonRef: ElementRef;
+   @ViewChild('filterIcon') filterIcon: ElementRef;
+
+  overlayRef: OverlayRef;
+  overlayPosition: PositionStrategy;
+  formComponentPortal: ComponentPortal<OverlayComponent>;
+
 
   constructor(
     private getDataService: GetdataService,
     private fb: FormBuilder,
     private matDialog: MatDialog,
     private overlay: Overlay,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    private dialog: MatDialog
   ) {
     getDataService.getAllDeclarationTypes();
+
+    this.getDataService.getAllCountries()
+    .subscribe((countries: Country[]) => {
+      this.countryData = countries;
+      console.log('Heres some data');
+      console.log(this.countryData);
+      this.dataSource = new MatTableDataSource(this.countryData);
+    }, error => this.errorMessage = <any>error);
   }
 
   ngOnInit() {
@@ -85,6 +111,13 @@ export class ControlsComponent implements OnInit {
       )
     );
 
+    this.overlayRef = this.overlay.create({
+      positionStrategy: this.getOverlayPosition(),
+      width: 250,
+      height: 0
+    });
+    this.formComponentPortal = new ComponentPortal(OverlayComponent);
+
     this.stateGroupsOptions$ = this.stateForm
       .get('stateGroup')
       .valueChanges.pipe(
@@ -93,30 +126,34 @@ export class ControlsComponent implements OnInit {
       );
   }
 
+  openDialogWithoutRef(event: any) {
+    if (event.target.value !== '?') {
+      return;
+    }
+
+    this.dialog.open(this.secondDialog);
+  }
+
+
+  getOverlayPosition(): PositionStrategy {
+    this.overlayPosition = this.overlay.position()
+      .connectedTo(
+        this.buttonRef,
+        {originX: 'start', originY: 'bottom'},
+        {overlayX: 'start', overlayY: 'bottom'}
+      );
+
+    return this.overlayPosition;
+  }
+
   openSpaghettiPanel(event: any) {
     if (event.target.value !== '?') {
       return;
     }
 
-    const config = new OverlayConfig();
-
-    config.positionStrategy = this.overlay
-      .position()
-      .global()
-      .centerHorizontally()
-      .centerVertically();
-
-    // config.hasBackdrop = true;
-
-    const overlayRef = this.overlay.create(config);
-
-    overlayRef.backdropClick().subscribe(() => {
-      overlayRef.dispose();
-    });
-
-    overlayRef.attach(
-      new ComponentPortal(OverlayComponent, this.viewContainerRef)
-    );
+    if (!this.overlayRef.hasAttached()) {
+      this.overlayRef.attach(this.formComponentPortal);
+    }
   }
 
   getCountries() {

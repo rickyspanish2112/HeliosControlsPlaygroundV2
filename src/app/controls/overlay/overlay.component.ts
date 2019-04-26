@@ -5,6 +5,13 @@ import { GetdataService } from 'src/app/service/getdata.service';
 import { MatTableDataSource } from '@angular/material';
 import { Country } from 'src/app/model/country';
 
+
+export const _filter = (opt: string[], value: string): string[] => {
+  const filterValue = value.toLowerCase();
+
+  return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
+};
+
 @Component({
   selector: 'app-overlay',
   templateUrl: './overlay.component.html',
@@ -34,7 +41,5 @@ export class OverlayComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
 
 }
