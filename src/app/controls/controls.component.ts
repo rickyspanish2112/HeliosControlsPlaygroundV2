@@ -1,14 +1,31 @@
-import { Component, OnInit, NgZone, ViewChild, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  QueryList,
+  ViewContainerRef
+} from '@angular/core';
 import { GetdataService } from '../service/getdata.service';
 import { Declarationtype } from '../model/declarationtypes';
 import { Observable } from 'rxjs';
 import { startWith, map, take } from 'rxjs/operators';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { State } from '../model/state';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Country } from '../model/country';
 import { MatAutocompleteTrigger, MatDialog } from '@angular/material';
-import { LookupdialogComponent } from './lookup-dialog/lookupdialog.component';
+import {
+  TemplatePortalDirective,
+  Portal,
+  ComponentPortal
+} from '@angular/cdk/portal';
+import {
+  Overlay,
+  CdkOverlayOrigin,
+  OverlayConfig,
+  ConnectionPositionPair
+} from '@angular/cdk/overlay';
+import { OverlayComponent } from './overlay/overlay.component';
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -32,7 +49,7 @@ export class ControlsComponent implements OnInit {
     stateGroup: ''
   });
 
- lookupInput = new FormControl();
+  lookupInput = new FormControl();
 
   stateGroupsOptions$: Observable<State[]>;
   stateGroups: State[] = [];
@@ -41,10 +58,18 @@ export class ControlsComponent implements OnInit {
   selected: Country;
   selectedCountryName: string;
 
-  @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
+  isMenuOpen = false;
 
-  constructor(private getDataService: GetdataService,
-    private fb: FormBuilder, private matDialog: MatDialog) {
+  @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger;
+  @ViewChildren(TemplatePortalDirective) templatePortals: QueryList<Portal<any>>;
+
+  constructor(
+    private getDataService: GetdataService,
+    private fb: FormBuilder,
+    private matDialog: MatDialog,
+    private overlay: Overlay,
+    private viewContainerRef: ViewContainerRef
+  ) {
     getDataService.getAllDeclarationTypes();
   }
 
@@ -53,9 +78,7 @@ export class ControlsComponent implements OnInit {
     this.getStates();
     this.getCountries();
 
-    this.declarationTypes$ = this.typeCtrl
-    .valueChanges
-    .pipe(
+    this.declarationTypes$ = this.typeCtrl.valueChanges.pipe(
       map(type =>
         // type ? this.filteredTypes(type) : this.declarationTypes.slice()
         this.filteredTypes(type)
@@ -69,6 +92,33 @@ export class ControlsComponent implements OnInit {
         map(value => this.filterGroup(value))
       );
   }
+
+  openSpaghettiPanel(event: any) {
+    if (event.target.value !== '?') {
+      return;
+    }
+
+    const config = new OverlayConfig();
+
+    config.positionStrategy = this.overlay
+      .position()
+      .global()
+      .centerHorizontally()
+      .centerVertically();
+
+    // config.hasBackdrop = true;
+
+    const overlayRef = this.overlay.create(config);
+
+    overlayRef.backdropClick().subscribe(() => {
+      overlayRef.dispose();
+    });
+
+    overlayRef.attach(
+      new ComponentPortal(OverlayComponent, this.viewContainerRef)
+    );
+  }
+
   getCountries() {
     this.getDataService.getAllCountries().subscribe(data => {
       return (this.countries = data);
@@ -114,21 +164,4 @@ export class ControlsComponent implements OnInit {
       this.selectedCountryName = country.name;
     }
   }
-
-  openLookupDialog(event: any) {
-    if (event.target.value === '?') {
-      this.matDialog.open(LookupdialogComponent, {
-        height: '300px',
-        width: '300px',
-      });
-    }
-
-  }
-
-/*   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-    if (event.key === 'ArrowDown') {
-      this.autocomplete.openPanel();
-    }
-  }
- */
 }

@@ -9,13 +9,13 @@ import { AppComponent } from './app.component';
 import { ControlsComponent } from './controls/controls.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LookupdialogComponent } from './controls/lookup-dialog/lookupdialog.component';
+import { OverlayComponent } from './controls/overlay/overlay.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ControlsComponent,
-    LookupdialogComponent
+    OverlayComponent
   ],
   imports: [
     BrowserModule,
@@ -26,10 +26,10 @@ import { LookupdialogComponent } from './controls/lookup-dialog/lookupdialog.com
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  entryComponents: [
-    LookupdialogComponent
-  ],
   providers: [HttpClient, FormBuilder],
+  entryComponents: [
+    OverlayComponent,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
